@@ -16,7 +16,6 @@
         promise
         .then(function(response){
             ctrl.items = response.data.menu_items;
-            console.log(ctrl.items);
         })
         .catch(function(error){
             console.log(error);
