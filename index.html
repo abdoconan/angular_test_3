@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="NarrowItDownApp">
+  <head>
+    <title>Narrow Down Your Menu Choice</title>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+  </head>
+<body ng-controller = "NarrowItDownController as ctrl">
+   <div class="container">
+    <h1>Narrow Down Your Chinese Menu Choice</h1>
+
+    <div class="form-group">
+      <input type="text" placeholder="search term" class="form-control" ng-model="ctrl.key">
+    </div>
+    <div class="form-group narrow-button">
+      <button class="btn btn-primary" ng-click='ctrl.get_filtered_items();'>Narrow It Down For Me!</button>
+    </div>
+    
+
+    <!-- found-items should be implemented as a component -->
+    <!-- <found-items found-items="...." on-remove="...."></found-items> -->
+  </div>
+  <div class="container" ng-hide='ctrl.nothing'>
+    <ul>
+      <li ng-repeat="item in ctrl.newitems"> 
+        <h5>{{item.short_name}}, {{item.name}}, {{item.description}}
+          <button ng-click="ctrl.remove($idnex)">Don't want this one</button>
+        </h5>
+      </li>
+    </ul>
+  </div>
+  <div class="container" ng-show="ctrl.nothingToShow">
+    <h3>Nothing found</h3>
+  </div>
+  <div class="container" ng-show="ctrl.nothing">
+    <h3>Please enter search key first</h3>
+  </div>
+
+</body>
+</html>
