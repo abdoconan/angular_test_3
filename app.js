@@ -24,6 +24,7 @@
             if(ctrl.key == "")
             {
                 ctrl.nothing = true;
+                ctrl.nothingToShow = false;
             }
             else{
                 ctrl.nothing = false;
