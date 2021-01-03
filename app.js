@@ -5,21 +5,36 @@
     .service('GetMenuItems', getMenuItems)
     .service("FilterService", filterService)
     .service("RemoveThis", removeThis)
+    .service("LoadJSON", loadJSON)
     .constant('restUrl', 'http://davids-restaurant.herokuapp.com/menu_items.json');
 
-    NarrowItDownController.$inject = ['GetMenuItems','FilterService','RemoveThis'];
-    function NarrowItDownController(GetMenuItems,FilterService,RemoveThis){
+    NarrowItDownController.$inject = ['GetMenuItems','FilterService','RemoveThis', 'LoadJSON'];
+    function NarrowItDownController(GetMenuItems,FilterService,RemoveThis,LoadJSON){
         var ctrl = this;
     
         ctrl.key = "";
-        var promise = GetMenuItems.get_items();
-        promise
+        // var promise = GetMenuItems.get_items();
+        // promise
+        // .then(function(response){
+        //     ctrl.items = response.data.menu_items;
+        // })
+        // .catch(function(error){
+        //     console.log(error);
+        // });
+
+        var localpromis = LoadJSON.load_json();
+
+        localpromis
         .then(function(response){
             ctrl.items = response.data.menu_items;
         })
-        .catch(function(error){
-            console.log(error);
+        .catch(function(err){
+            console.log(err);
         });
+
+
+
+
         ctrl.get_filtered_items = function (){
             if(ctrl.key == "")
             {
@@ -61,6 +76,18 @@
         };
     };
 
+    loadJSON.$inject = ['$http']
+    function loadJSON($http){
+        var service = this;
+        
+
+        service.load_json = function(){
+            var data = $http.get('/data.json');
+            return data; 
+        };
+
+    };
+
     function filterService(){
         var service = this;
 
@@ -88,6 +115,10 @@
             return arr;
         };
     };
+    
+    
+
+
 
 }
 )();
