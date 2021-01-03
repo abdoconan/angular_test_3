@@ -82,7 +82,7 @@
         
 
         service.load_json = function(){
-            var data = $http.get('/data.json');
+            var data = $http.get('data.json');
             return data; 
         };
 
