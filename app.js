@@ -13,24 +13,24 @@
         var ctrl = this;
     
         ctrl.key = "";
-        // var promise = GetMenuItems.get_items();
-        // promise
-        // .then(function(response){
-        //     ctrl.items = response.data.menu_items;
-        // })
-        // .catch(function(error){
-        //     console.log(error);
-        // });
-
-        var localpromis = LoadJSON.load_json();
-
-        localpromis
+        var promise = GetMenuItems.get_items();
+        promise
         .then(function(response){
             ctrl.items = response.data.menu_items;
         })
-        .catch(function(err){
-            console.log(err);
+        .catch(function(error){
+            console.log(error);
         });
+
+        // var localpromis = LoadJSON.load_json();
+
+        // localpromis
+        // .then(function(response){
+        //     ctrl.items = response.data.menu_items;
+        // })
+        // .catch(function(err){
+        //     console.log(err);
+        // });
 
 
 
